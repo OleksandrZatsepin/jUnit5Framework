@@ -1,8 +1,8 @@
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static service.ApiService.*;
 
@@ -61,6 +61,27 @@ public class SampleTest extends BaseTest {
                 .contentType("application/json")
                 .body("name", equalTo("morpheus"))
                 .body("job", equalTo("leader"));
+    }
+
+    @Test
+    public void postCreateFakerUserTest() {
+        Faker user = new Faker();
+        String name = user.name().firstName();
+        String job = user.job().title();
+        final String json = "{\"name\": \"" + name + "\", \"job\": \"" + job + "\"}";
+
+//        System.out.println("name: " + name + ", job: " + job);
+
+        given()
+                .contentType("application/json")
+                .body(json)
+        .when()
+                .post(SERVICE_ENDPOINT)
+        .then()
+                .statusCode(STATUS_CODE_CREATED)
+                .contentType("application/json")
+                .body("name", equalTo(name))
+                .body("job", equalTo(job));
     }
 
     @Test
