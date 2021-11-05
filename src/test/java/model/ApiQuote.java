@@ -1,13 +1,17 @@
 package model;
 
 public class ApiQuote {
-    Integer id;
+    private Integer id;
     String quote;
 
     public ApiQuote(Integer id, String quote) {
         this.id = id;
         this.quote = quote;
     }
+
+    public ApiQuote() {
+    }
+
 
     public Integer getId() {
         return id;

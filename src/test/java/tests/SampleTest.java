@@ -1,12 +1,21 @@
+/*
+  Some tests for training.
+ */
+
+package tests;
+
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static constants.HTTPStatusCodes.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
-import static service.ApiService.*;
 
 public class SampleTest extends BaseTest {
+
+    final String SERVICE_ENDPOINT_ONE = "/api/login";
+    final String SERVICE_ENDPOINT_TWO = "/api/users";
 
     @BeforeEach
     public void setUp() {
@@ -17,7 +26,7 @@ public class SampleTest extends BaseTest {
     void getListUsersTest() {
         given()
         .when()
-                .get(SERVICE_ENDPOINT + "?page=2")
+                .get(SERVICE_ENDPOINT_TWO + "?page=2")
         .then()
                 .contentType("application/json")
                 .statusCode(STATUS_CODE_OK)
@@ -30,7 +39,7 @@ public class SampleTest extends BaseTest {
     void getSingleUserTest() {
         given()
         .when()
-                .get(SERVICE_ENDPOINT + "/2")
+                .get(SERVICE_ENDPOINT_TWO + "/2")
         .then()
                 .contentType("application/json")
                 .statusCode(STATUS_CODE_OK)
@@ -42,7 +51,7 @@ public class SampleTest extends BaseTest {
     void getSingleUserNotFoundTest() {
         given()
         .when()
-                .get(SERVICE_ENDPOINT + "/23")
+                .get(SERVICE_ENDPOINT_TWO + "/23")
         .then()
                 .statusCode(STATUS_CODE_NOT_FOUND);
     }
@@ -55,7 +64,7 @@ public class SampleTest extends BaseTest {
                 .contentType("application/json")
                 .body(json)
         .when()
-                .post(SERVICE_ENDPOINT)
+                .post(SERVICE_ENDPOINT_TWO)
         .then()
                 .statusCode(STATUS_CODE_CREATED)
                 .contentType("application/json")
@@ -76,7 +85,7 @@ public class SampleTest extends BaseTest {
                 .contentType("application/json")
                 .body(json)
         .when()
-                .post(SERVICE_ENDPOINT)
+                .post(SERVICE_ENDPOINT_TWO)
         .then()
                 .statusCode(STATUS_CODE_CREATED)
                 .contentType("application/json")
@@ -88,7 +97,7 @@ public class SampleTest extends BaseTest {
     void getDeleteUserTest() {
         given()
         .when()
-                .delete(SERVICE_ENDPOINT + "/2")
+                .delete(SERVICE_ENDPOINT_TWO + "/2")
         .then()
                 .statusCode(STATUS_CODE_NO_CONTENT);
     }
