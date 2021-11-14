@@ -1,12 +1,14 @@
 package model;
 
 public class ApiResponse {
-    String type;
-    ApiQuote value;
+    private Integer code;
+    private String type;
+    private String message;
 
-    public ApiResponse(String type, ApiQuote value) {
+    public ApiResponse(Integer code, String type, String message) {
+        this.code = code;
         this.type = type;
-        this.value = value;
+        this.message = message;
     }
 
     public ApiResponse() {
@@ -20,11 +22,19 @@ public class ApiResponse {
         this.type = type;
     }
 
-    public ApiQuote getValue() {
-        return value;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setValue(ApiQuote value) {
-        this.value = value;
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

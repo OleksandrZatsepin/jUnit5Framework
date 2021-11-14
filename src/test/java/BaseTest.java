@@ -1,5 +1,3 @@
-package tests;
-
 import config.SystemProperties;
 import service.ApiService;
 

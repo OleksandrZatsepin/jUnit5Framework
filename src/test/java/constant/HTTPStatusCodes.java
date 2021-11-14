@@ -1,4 +1,4 @@
-package constants;
+package constant;
 
 public class HTTPStatusCodes {
     public static final Integer STATUS_CODE_OK = 200;
