@@ -3,7 +3,6 @@ package service;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import model.ApiResponse;
 import model.Order;
 import model.Pet;
 import model.User;
