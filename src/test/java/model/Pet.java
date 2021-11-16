@@ -76,7 +76,4 @@ public class Pet {
         pet.setStatus(AVAILABLE_STATUS);
         return pet;
     }
-
-
-
 }

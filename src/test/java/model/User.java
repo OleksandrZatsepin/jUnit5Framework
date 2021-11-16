@@ -1,9 +1,20 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.javafaker.Faker;
 
 import java.util.Random;
 
+@JsonPropertyOrder({
+        "id",
+        "username",
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "phone",
+        "userStatus"
+})
 public class User {
     private Long id;
     private String username;
@@ -13,6 +24,9 @@ public class User {
     private String password;
     private String phone;
     private Integer userStatus;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -79,15 +93,21 @@ public class User {
     }
 
     public static User getDefaultUser() {
-        Faker faker = new Faker();
+        final Faker faker = new Faker();
         final User user = new User();
         user.setId(new Random().nextLong());
-        user.setUsername(faker.name().username());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setPhone(faker.phoneNumber().cellPhone());
+        user.setUsername("asd");
+        user.setFirstName("zxc");
+        user.setLastName("qwe");
+        user.setEmail("qaz");
+        user.setPassword("wsx");
+        user.setPhone("edc");
+//        user.setUsername(faker.name().username());
+//        user.setFirstName(faker.name().firstName());
+//        user.setLastName(faker.name().lastName());
+//        user.setEmail(faker.internet().emailAddress());
+//        user.setPassword(faker.internet().password());
+//        user.setPhone(faker.phoneNumber().cellPhone());
         user.setUserStatus(new Random().nextInt());
         return user;
     }
