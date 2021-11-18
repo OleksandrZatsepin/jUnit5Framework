@@ -1,23 +1,32 @@
 package model;
 
-import com.github.javafaker.Faker;
+import util.DataGenerator;
 
 import java.util.List;
-import java.util.Random;
 
 public class Pet {
-    public static final String AVAILABLE_STATUS = "available";
-    public static final String PENDING_STATUS = "pending";
-    public static final String SOLD_STATUS = "sold";
 
     private Long id;
     private Category category;
     private String name;
     private List<String> photoUrls;
     private List<Tag> tags;
-//    private List<PetStatus> status;
-    private String status;
+    private PetStatus petStatus;
 
+    public static Pet getDefaultPet() {
+        return getDefaultPet(PetStatus.AVAILABLE);
+    }
+
+    public static Pet getDefaultPet(PetStatus petStatus) {
+        final Pet pet = new Pet();
+        pet.setId(DataGenerator.randomId());
+        pet.setCategory(Category.getDefaultCategory());
+        pet.setName(DataGenerator.randomPetName());
+        pet.setPhotoUrls(List.of(DataGenerator.randomUrl()));
+        pet.setTags(List.of(Tag.getDefaultTag()));
+        pet.setStatus(petStatus);
+        return pet;
+    }
     public Long getId() {
         return id;
     }
@@ -58,22 +67,13 @@ public class Pet {
         this.tags = tags;
     }
 
-    public String getStatus() {
-        return status;
+    public PetStatus getStatus() {
+        return petStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(PetStatus status) {
+        this.petStatus = status;
     }
 
-    public static Pet getDefaultPet() {
-        final Pet pet = new Pet();
-        pet.setId(new Random().nextLong());
-        pet.setCategory(Category.getDefaultCategory());
-        pet.setName(new Faker().funnyName().name());
-        pet.setPhotoUrls(List.of(new Faker().internet().url()));
-        pet.setTags(List.of(Tag.getDefaultTag()));
-        pet.setStatus(AVAILABLE_STATUS);
-        return pet;
-    }
+
 }

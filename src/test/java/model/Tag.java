@@ -1,12 +1,17 @@
 package model;
 
-import com.github.javafaker.Faker;
-
-import java.util.Random;
+import util.DataGenerator;
 
 public class Tag {
     private Long id;
     private String name;
+
+    public static Tag getDefaultTag() {
+        final Tag tag = new Tag();
+        tag.setId(DataGenerator.randomId());
+        tag.setName(DataGenerator.randomAnimalTag());
+        return tag;
+    }
 
     public Long getId() {
         return id;
@@ -23,12 +28,4 @@ public class Tag {
     public void setName(String name) {
         this.name = name;
     }
-
-    public static Tag getDefaultTag() {
-        final Tag tag = new Tag();
-        tag.setId(new Random().nextLong());
-        tag.setName(new Faker().animal().name());
-        return tag;
-    }
-
 }

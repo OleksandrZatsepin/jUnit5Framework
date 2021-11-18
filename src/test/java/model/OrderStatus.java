@@ -1,12 +1,17 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum OrderStatus {
     PLACED("placed"), APPROVED("approved"), DELIVERED("delivered");
-    private final String status;
-    OrderStatus(String status) {
-            this.status = status;
+
+    private final String orderStatus;
+    OrderStatus(String orderStatus) {
+            this.orderStatus = orderStatus;
         }
-    public String toString(){
-            return status;
-        }
+
+    @JsonValue
+    public String getStatus() {
+        return orderStatus;
+    }
 }

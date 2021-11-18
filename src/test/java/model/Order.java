@@ -1,29 +1,36 @@
 package model;
 
-
 import com.github.javafaker.DateAndTime;
 import com.github.javafaker.Faker;
+import util.DataGenerator;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Random;
-
-import static java.time.format.DateTimeFormatter.ISO_INSTANT;
+import java.util.concurrent.TimeUnit;
 
 public class Order {
-    public static final String PLACED_STATUS = "placed";
-    public static final String APPROVED_STATUS = "approved";
-    public static final String DELIVERED_STATUS = "delivered";
 
     private Long id;
     private Long petId;
     private Integer quantity;
-//    private DateAndTime shipDate;
-    private String shipDate;
-    private String status;
+    private DateAndTime shipDate;
+//    private String shipDate;
+    private OrderStatus status;
     private Boolean complete;
 
+    public static Order getDefaultOrder(OrderStatus status) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sZ");
+        Date date = new Date(System.currentTimeMillis());
+        final Order order = new Order();
+        order.setId(DataGenerator.randomId());
+        order.setPetId(DataGenerator.randomId());
+        order.setQuantity(new Random().nextInt());
+//        order.setShipDate();
+        order.setStatus(status);
+        order.setComplete(true);
+        return order;
+    }
     public Long getId() {
         return id;
     }
@@ -48,27 +55,27 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public String getShipDate() {
-        return shipDate;
-    }
-
-    public void setShipDate(String shipDate) {
-        this.shipDate = shipDate;
-    }
-
-    //    public DateAndTime getShipDate() {
+//    public String getShipDate() {
 //        return shipDate;
 //    }
 //
-//    public void setShipDate(DateAndTime shipDate) {
+//    public void setShipDate(String shipDate) {
 //        this.shipDate = shipDate;
 //    }
 
-    public String getStatus() {
+    public DateAndTime getShipDate() {
+        return shipDate;
+    }
+
+    public void setShipDate(DateAndTime shipDate) {
+        this.shipDate = shipDate;
+    }
+
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
@@ -80,16 +87,5 @@ public class Order {
         this.complete = complete;
     }
 
-    public static Order getDefaultOrder() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sZ");
-        Date date = new Date(System.currentTimeMillis());
-        final Order order = new Order();
-        order.setId(new Random().nextLong());
-        order.setPetId(new Random().nextLong());
-        order.setQuantity(new Random().nextInt());
-        order.setShipDate(formatter.format(date));
-        order.setStatus(PLACED_STATUS);
-        order.setComplete(true);
-        return order;
-    }
+
 }

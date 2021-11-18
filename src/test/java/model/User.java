@@ -1,20 +1,9 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.github.javafaker.Faker;
+import util.DataGenerator;
 
 import java.util.Random;
 
-@JsonPropertyOrder({
-        "id",
-        "username",
-        "firstName",
-        "lastName",
-        "email",
-        "password",
-        "phone",
-        "userStatus"
-})
 public class User {
     private Long id;
     private String username;
@@ -25,9 +14,18 @@ public class User {
     private String phone;
     private Integer userStatus;
 
-    public User() {
+    public static User getDefaultUser() {
+        final User user = new User();
+        user.setId(DataGenerator.randomId());
+        user.setUsername(DataGenerator.randomUserName());
+        user.setFirstName(DataGenerator.randomFirstName());
+        user.setLastName(DataGenerator.randomLastName());
+        user.setEmail(DataGenerator.randomEmailAddress());
+        user.setPassword(DataGenerator.randomPassword());
+        user.setPhone(DataGenerator.randomPhoneNumber());
+        user.setUserStatus(new Random().nextInt());
+        return user;
     }
-
     public Long getId() {
         return id;
     }
@@ -92,23 +90,4 @@ public class User {
         this.userStatus = userStatus;
     }
 
-    public static User getDefaultUser() {
-        final Faker faker = new Faker();
-        final User user = new User();
-        user.setId(new Random().nextLong());
-        user.setUsername("asd");
-        user.setFirstName("zxc");
-        user.setLastName("qwe");
-        user.setEmail("qaz");
-        user.setPassword("wsx");
-        user.setPhone("edc");
-//        user.setUsername(faker.name().username());
-//        user.setFirstName(faker.name().firstName());
-//        user.setLastName(faker.name().lastName());
-//        user.setEmail(faker.internet().emailAddress());
-//        user.setPassword(faker.internet().password());
-//        user.setPhone(faker.phoneNumber().cellPhone());
-        user.setUserStatus(new Random().nextInt());
-        return user;
-    }
 }

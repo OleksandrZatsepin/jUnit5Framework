@@ -1,12 +1,17 @@
 package model;
 
-import com.github.javafaker.Faker;
-
-import java.util.Random;
+import util.DataGenerator;
 
 public class Category {
     private Long id;
     private String name;
+
+    public static Category getDefaultCategory() {
+        final Category category = new Category();
+        category.setId(DataGenerator.randomId());
+        category.setName(DataGenerator.randomAnimalCategory());
+        return category;
+    }
 
     public Long getId() {
         return id;
@@ -22,12 +27,5 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public static Category getDefaultCategory() {
-        final Category category = new Category();
-        category.setId(new Random().nextLong());
-        category.setName(new Faker().animal().name());
-        return category;
     }
 }
