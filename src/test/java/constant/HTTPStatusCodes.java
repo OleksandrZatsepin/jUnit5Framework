@@ -8,5 +8,6 @@ public class HTTPStatusCodes {
     public static final Integer STATUS_CODE_NOT_FOUND = 404;
     public static final Integer STATUS_CODE_METHOD_NOT_ALLOWED = 405;
     public static final Integer STATUS_CODE_UNSUPPORTED_MEDIA_TYPE = 415;
+    public static final Integer STATUS_CODE_INTERNAL_SERVER_ERROR = 500;
 
 }

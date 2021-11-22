@@ -12,7 +12,7 @@ public final class Endpoints {
     public static final String USER_LOGIN_ENDPOINT = "/user/login";
     public static final String USER_LOGOUT_ENDPOINT = "/user/logout";
 
-    public static final String ORDER_FOR_PET_ENDPOINT = "/store/order";
+    public static final String ORDER_ENDPOINT = "/store/order";
     public static final String ORDER_BY_ID_ENDPOINT = "/store/order/{orderId}";
-    public static final String INVENTORIES_BY_STATUS_ENDPOINT = "/store/inventory";
+    public static final String INVENTORY_ENDPOINT = "/store/inventory";
 }

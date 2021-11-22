@@ -14,20 +14,20 @@ public class Order {
     private Long id;
     private Long petId;
     private Integer quantity;
-    private DateAndTime shipDate;
-//    private String shipDate;
+//    private DateAndTime shipDate;
+    private String shipDate;
     private OrderStatus status;
     private Boolean complete;
 
-    public static Order getDefaultOrder(OrderStatus status) {
+    public static Order getDefaultOrder() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sZ");
         Date date = new Date(System.currentTimeMillis());
         final Order order = new Order();
         order.setId(DataGenerator.randomId());
         order.setPetId(DataGenerator.randomId());
         order.setQuantity(new Random().nextInt());
-//        order.setShipDate();
-        order.setStatus(status);
+        order.setShipDate(formatter.format(date));
+        order.setStatus(OrderStatus.PLACED);
         order.setComplete(true);
         return order;
     }
@@ -55,21 +55,21 @@ public class Order {
         this.quantity = quantity;
     }
 
-//    public String getShipDate() {
-//        return shipDate;
-//    }
-//
-//    public void setShipDate(String shipDate) {
-//        this.shipDate = shipDate;
-//    }
-
-    public DateAndTime getShipDate() {
+    public String getShipDate() {
         return shipDate;
     }
 
-    public void setShipDate(DateAndTime shipDate) {
+    public void setShipDate(String shipDate) {
         this.shipDate = shipDate;
     }
+
+//    public DateAndTime getShipDate() {
+//        return shipDate;
+//    }
+//
+//    public void setShipDate(DateAndTime shipDate) {
+//        this.shipDate = shipDate;
+//    }
 
     public OrderStatus getStatus() {
         return status;

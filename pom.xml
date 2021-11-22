@@ -20,7 +20,10 @@
         <jackson.version>2.13.0</jackson.version>
         <javafaker.version>1.0.2</javafaker.version>
         <allure.version>2.16.1</allure.version>
+        <awaitility.version>4.1.1</awaitility.version>
         <application.url>https://petstore.swagger.io/v2</application.url>
+<!--        <api.key>apiKey</api.key>-->
+<!--        <api.secret>special-key</api.secret>-->
     </properties>
 
     <dependencies>
@@ -96,6 +99,12 @@
             <version>3.21.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -116,6 +125,8 @@
                     </argLine>
                     <systemPropertyVariables>
                         <application.url>${application.url}</application.url>
+<!--                        <api.key>${api.key}</api.key>-->
+<!--                        <api.secret>${api.secret}</api.secret>-->
                     </systemPropertyVariables>
                     <systemProperties>
                         <property>

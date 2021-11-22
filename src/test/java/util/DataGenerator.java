@@ -1,7 +1,7 @@
 package util;
 
 import com.github.javafaker.Faker;
-import config.SystemProperties;
+import config.SystemConstants;
 
 public class DataGenerator {
     static Faker faker = new Faker();
@@ -11,15 +11,15 @@ public class DataGenerator {
     }
 
     public static String randomPetName() {
-        return SystemProperties.TEST_NAME_PREFIX + faker.funnyName().name();
+        return SystemConstants.TEST_NAME_PREFIX + faker.funnyName().name();
     }
 
     public static String randomAnimalTag() {
-        return SystemProperties.TEST_NAME_PREFIX + faker.animal().name();
+        return SystemConstants.TEST_NAME_PREFIX + faker.animal().name();
     }
 
     public static String randomAnimalCategory() {
-        return SystemProperties.TEST_NAME_PREFIX + faker.animal();
+        return SystemConstants.TEST_NAME_PREFIX + faker.animal();
     }
 
     public static String randomUrl() {
@@ -39,7 +39,7 @@ public class DataGenerator {
     }
 
     public static String randomUserName() {
-        return SystemProperties.TEST_NAME_PREFIX + faker.name().username();
+        return SystemConstants.TEST_NAME_PREFIX + faker.name().username();
     }
 
     public static String randomFirstName() {
