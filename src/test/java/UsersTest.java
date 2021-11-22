@@ -2,27 +2,27 @@ import model.ApiResponse;
 import model.User;
 
 import org.assertj.core.api.Assertions;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import service.ApiException;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static config.SystemConstants.*;
-
-import static constant.HTTPStatusCodes.STATUS_CODE_NOT_FOUND;
-import static constant.HTTPStatusCodes.STATUS_CODE_OK;
+import static constant.HTTPStatusCodes.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.awaitility.Awaitility.await;
 
 @DisplayName("User tests:")
 public class UsersTest extends BaseTest {
 
     static List<User> users = new ArrayList<>();
-    static String testUserName = "";
     static String[] userNames = new String[DEFAULT_ARRAY_LENGTH];
 
 //    @BeforeAll
@@ -54,8 +54,8 @@ public class UsersTest extends BaseTest {
         user.setUsername(DEFAULT_USERNAME);
         user.setId(123L);
         ApiResponse response = apiService.updateUserByUsername(user);
-        assertThat(response.getCode().equals(STATUS_CODE_OK));
-        assertThat(response.getMessage().equals(user.getId().toString()));
+        assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
+        assertThat(response.getMessage()).isEqualTo(user.getId().toString());
         System.out.println("User with username " + user.getUsername() + " has Id " + user.getId());
     }
 
@@ -78,27 +78,25 @@ public class UsersTest extends BaseTest {
     void addTestUser() throws ApiException {
         User user = User.getDefaultUser();
         ApiResponse response = apiService.addUser(user);
-        assertThat(response.getCode().equals(STATUS_CODE_OK));
-        assertThat(response.getMessage().equals(user.getId().toString()));
-        testUserName = user.getUsername();
-        System.out.println("User with username " + user.getUsername() + " has Id " + user.getId());
+        assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
+        assertThat(response.getMessage()).isEqualTo(user.getId().toString());
+        System.out.println("TestUser with username " + user.getUsername() + " has Id " + user.getId());
     }
 
-    @DisplayName("Remove previously created test user by username")
-    @Test
-    void removeTestUser() {
-        ApiResponse response = apiService.removeUserByUsername(testUserName);
-        assertThat(response.getCode().equals(STATUS_CODE_OK));
+    @Disabled("Doesn't work correctly yet")
+    @DisplayName("Remove previously created TestUser by username")
+    @RepeatedTest(10)
+    void removeTestUser() throws ApiException {
+        User user = User.getDefaultUser();
+        String testUserName = user.getUsername();
+        ApiResponse responseOne = apiService.addUser(user);
+        assertThat(responseOne.getCode()).isEqualTo(STATUS_CODE_OK);
+        System.out.println("User with username " + testUserName + " successfully created ");
+
+        ApiResponse responseTwo = apiService.removeUserByUsername(testUserName);
+        assertThat(responseTwo.getCode()).isEqualTo(STATUS_CODE_OK);
+        assertThat(responseTwo.getMessage()).isEqualTo(testUserName);
         System.out.println("User with username " + testUserName + " successfully removed ");
-    }
-
-    @Disabled("Doesn't work yet")
-    @DisplayName("Trying to find previously removed test user should return code 404")
-    @Test
-    void tryFindRemovedUserByUsername() throws ApiException {
-        User response = apiService.findUserByUsername(testUserName);
-
-        System.out.println("User with username " + testUserName + " was not found");
     }
 
     @DisplayName("Create several test users with input ArrayList")
@@ -110,7 +108,7 @@ public class UsersTest extends BaseTest {
             System.out.println("User with username " + user.getUsername() + " has Id " + user.getId());
         }
         ApiResponse response = apiService.addListOfUsers(users);
-        assertThat(response.getCode().equals(STATUS_CODE_OK));
+        assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
     }
 
     @DisplayName("Create several test users with input Array")
@@ -123,7 +121,7 @@ public class UsersTest extends BaseTest {
             System.out.println("User with username " + user.getUsername() + " has Id " + user.getId());
         }
         ApiResponse response = apiService.addArrayOfUsers(users);
-        assertThat(response.getCode().equals(STATUS_CODE_OK));
+        assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
     }
 
 
