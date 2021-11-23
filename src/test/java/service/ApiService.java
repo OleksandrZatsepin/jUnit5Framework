@@ -171,4 +171,24 @@ public class ApiService {
         return response.getBody().as(ApiResponse.class);
     }
 
+    public ApiResponse loginUser(String username, String password) throws ApiException {
+        Response response = given(spec)
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .queryParam("username", username)
+                .queryParam("password", password)
+                .get(USER_LOGIN_ENDPOINT);
+        validateResponse(response);
+        return response.getBody().as(ApiResponse.class);
+    }
+
+    public ApiResponse logoutUser() throws ApiException {
+        Response response = given(spec)
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .get(USER_LOGOUT_ENDPOINT);
+        validateResponse(response);
+        return response.getBody().as(ApiResponse.class);
+    }
+
 }

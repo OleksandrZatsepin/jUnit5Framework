@@ -30,7 +30,7 @@ public class OrdersTest extends BaseTest {
     @DisplayName("Add Orders with test orderId >= 1 and <= 10")
     @org.junit.jupiter.api.Order(2)
     @ParameterizedTest
-    @ValueSource(longs = {1, 2, 3, 4, 5})
+    @ValueSource(longs = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     void shouldReturnOrdersWithTestId(Long orderId) throws ApiException {
         Order testOrder = Order.getDefaultOrder();
         testOrder.setId(orderId);
@@ -42,7 +42,7 @@ public class OrdersTest extends BaseTest {
     @DisplayName("Find Test Orders with orderId >= 1 and <= 10")
     @org.junit.jupiter.api.Order(3)
     @ParameterizedTest
-    @ValueSource(longs = {1, 2, 3, 4, 5})
+    @ValueSource(longs = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     void shouldFindOrdersWithTestId(Long orderId) throws ApiException {
         Order response = apiService.findOrderById(orderId);
         assertThat(response).matches(order -> order.getId().equals(response.getId()));
@@ -52,7 +52,7 @@ public class OrdersTest extends BaseTest {
     @DisplayName("Remove Test Orders with orderId >= 1 and <= 10")
     @org.junit.jupiter.api.Order(4)
     @ParameterizedTest
-    @ValueSource(longs = {1, 2, 3, 4, 5})
+    @ValueSource(longs = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     void shouldDeleteOrdersWithTestId(Long orderId) throws ApiException {
         ApiResponse response = apiService.removeOrderById(orderId);
         assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);

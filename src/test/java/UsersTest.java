@@ -98,4 +98,27 @@ public class UsersTest extends BaseTest {
         assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
         System.out.println("Array of Test Users created successfully");
     }
+
+    @DisplayName("User logs into system")
+    @org.junit.jupiter.api.Order(8)
+    @Test
+    void shouldLoginUser() throws ApiException {
+        User user = User.getDefaultUser();
+        String username = user.getUsername();
+        String password = user.getPassword();
+        ApiResponse response = apiService.loginUser(username, password);
+        assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
+        System.out.println("Test User with username " + user.getUsername() + " logged in successfully: " + response.getMessage());
+    }
+
+    @DisplayName("User logs out")
+    @org.junit.jupiter.api.Order(9)
+    @Test
+    void shouldLogoutUser() throws ApiException {
+        User user = User.getDefaultUser();
+        ApiResponse response = apiService.logoutUser();
+        assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
+        assertThat(response.getMessage()).isEqualTo("ok");
+        System.out.println("Test User with username " + user.getUsername() + " logged out successfully");
+    }
 }
