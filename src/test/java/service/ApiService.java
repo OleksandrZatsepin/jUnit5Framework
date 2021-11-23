@@ -49,7 +49,7 @@ public class ApiService {
         Response response = given(spec)
 //                .patch(PET_ENDPOINT, id);
 //                .queryParam("petId", id)
-                .get(PET_ENDPOINT + "/", id);
+                .get(PET_ENDPOINT, id);
 
         validateResponse(response);
 
