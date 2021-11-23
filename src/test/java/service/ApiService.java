@@ -41,21 +41,6 @@ public class ApiService {
         return Arrays.asList(petStatuses);
     }
 
-    public List<Pet> findPetsByStatus() throws ApiException {
-        return findPetsByStatus(null);
-    }
-
-    public Pet findPetsById(Long id) throws ApiException {
-        Response response = given(spec)
-//                .patch(PET_ENDPOINT, id);
-//                .queryParam("petId", id)
-                .get(PET_ENDPOINT, id);
-
-        validateResponse(response);
-
-        return response.getBody().as(Pet.class);
-    }
-
     public Pet addPet(Pet pet) throws ApiException {
         Response response = given(spec)
                 .body(pet)
@@ -65,14 +50,6 @@ public class ApiService {
         validateResponse(response);
 
         return response.getBody().as(Pet.class);
-    }
-
-    public ApiResponse removePetById(Long petId) {
-        Response response = given(spec)
-                .contentType(ContentType.JSON)
- //               .queryParam("id", petId)
-                .delete(PET_ENDPOINT, petId);
-        return response.getBody().as(ApiResponse.class);
     }
 
     public Order findOrderById(Long orderId) throws ApiException {
@@ -90,16 +67,6 @@ public class ApiService {
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .post(ORDER_ENDPOINT);
-        validateResponse(response);
-        return response.getBody().as(Order.class);
-    }
-
-    public Order findOrdersByStatus(Order order) throws ApiException {
-        Response response = given(spec)
-                .body(order)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .get(ORDER_ENDPOINT);
         validateResponse(response);
         return response.getBody().as(Order.class);
     }
