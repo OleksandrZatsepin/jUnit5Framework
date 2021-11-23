@@ -75,29 +75,22 @@ public class ApiService {
         return response.getBody().as(ApiResponse.class);
     }
 
-    public Order getOrderByValidId(Long orderId) {
-        return given(spec)
-                .get(ORDER_BY_ID_ENDPOINT, orderId)
-                .getBody()
-                .as(Order.class);
+    public Order findOrderById(Long orderId) throws ApiException {
+        Response response = given(spec)
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .get(ORDER_BY_ID_ENDPOINT, orderId);
+        validateResponse(response);
+        return response.getBody().as(Order.class);
     }
-
-//    public Order addOrder(Order order) {
-//        return given(spec)
-//                .body(order)
-//                .post(ORDER_FOR_PET_ENDPOINT)
-//                .getBody()
-//                .as(Order.class);
-//    }
 
     public Order addOrder(Order order) throws ApiException {
         Response response = given(spec)
                 .body(order)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .post(ORDER_ENDPOINT);
-
         validateResponse(response);
-
         return response.getBody().as(Order.class);
     }
 
@@ -105,43 +98,37 @@ public class ApiService {
         Response response = given(spec)
                 .body(order)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .get(ORDER_ENDPOINT);
-
         validateResponse(response);
-
         return response.getBody().as(Order.class);
+    }
+
+    public ApiResponse removeOrderById(Long orderId) throws ApiException {
+        Response response = given(spec)
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .delete(ORDER_BY_ID_ENDPOINT, orderId);
+        validateResponse(response);
+        return response.getBody().as(ApiResponse.class);
     }
 
     public User findUserByUsername(String userName) throws ApiException {
         Response response = given(spec)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .get(USER_BY_USERNAME_ENDPOINT, userName);
-
         validateResponse(response);
-
         return response.getBody().as(User.class);
     }
-
-//    public User findListUsersByUsername(String userName) throws ApiException {
-//        Response response = given(spec)
-//                .contentType(ContentType.JSON)
-//                .get(USER_BY_USERNAME_ENDPOINT, userName);
-//
-//        validateResponse(response);
-//
-//        User userNames = response.getBody().as(User.class);
-//        return userNames;
-//    }
-
 
     public ApiResponse addUser(User user) throws ApiException {
         Response response = given(spec)
                 .body(user)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .post(USER_ENDPOINT);
-
         validateResponse(response);
-
         return response.getBody().as(ApiResponse.class);
     }
 
@@ -149,10 +136,9 @@ public class ApiService {
         Response response = given(spec)
                 .body(users)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .post(LIST_OF_USERS_ENDPOINT);
-
         validateResponse(response);
-
         return response.getBody().as(ApiResponse.class);
     }
 
@@ -160,10 +146,9 @@ public class ApiService {
         Response response = given(spec)
                 .body(users)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .post(ARRAY_OF_USERS_ENDPOINT);
-
         validateResponse(response);
-
         return response.getBody().as(ApiResponse.class);
     }
 
@@ -171,18 +156,18 @@ public class ApiService {
         Response response = given(spec)
                 .body(user)
                 .contentType(ContentType.JSON)
-                .queryParam("userName", user.getUsername())
-                .put(USER_BY_USERNAME_ENDPOINT, user.getId());
-
+                .accept(ContentType.JSON)
+                .put(USER_BY_USERNAME_ENDPOINT, user.getUsername());
         validateResponse(response);
-
         return response.getBody().as(ApiResponse.class);
     }
 
-    public ApiResponse removeUserByUsername(String username) {
+    public ApiResponse removeUserByUsername(String username) throws ApiException {
         Response response = given(spec)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .delete(USER_BY_USERNAME_ENDPOINT, username);
+        validateResponse(response);
         return response.getBody().as(ApiResponse.class);
     }
 
