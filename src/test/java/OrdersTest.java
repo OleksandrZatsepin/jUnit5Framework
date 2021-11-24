@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.*;
 import org.junit.jupiter.params.provider.ValueSource;
 import service.ApiException;
 
+import static config.Endpoints.*;
 import static constant.HTTPStatusCodes.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class OrdersTest extends BaseTest {
 
     @Nested
-    @DisplayName("Endpoint: /store/order, method: POST")
+    @DisplayName("Endpoint: " + ORDER_ENDPOINT +", method: POST")
     class OrderTestsForPostMethod {
         @Nested
         @DisplayName("Positive tests")
@@ -54,7 +55,7 @@ public class OrdersTest extends BaseTest {
     }
 
     @Nested
-    @DisplayName("Endpoint: /store/order/{orderId}, method: GET")
+    @DisplayName("Endpoint: "+ ORDER_BY_ID_ENDPOINT + ", method: GET")
 
     class OrderTestsForGetMethod {
         @Nested
@@ -78,7 +79,7 @@ public class OrdersTest extends BaseTest {
     }
 
     @Nested
-    @DisplayName("Endpoint: /store/order/{orderId}, method: DELETE")
+    @DisplayName("Endpoint: " + ORDER_BY_ID_ENDPOINT + ", method: DELETE")
     class OrderTestsForDeleteMethod {
         @Nested
         @DisplayName("Positive tests")
