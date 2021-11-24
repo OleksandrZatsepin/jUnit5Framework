@@ -31,7 +31,9 @@ public class UsersTest extends BaseTest {
                 ApiResponse response = apiService.addUser(user);
                 assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
                 assertThat(response.getMessage()).isEqualTo(user.getId().toString());
-                System.out.println("Test User with username " + user.getUsername() + " and Id " + user.getId() + " created successfully");
+                System.out.println("Test User with username " + user.getUsername()
+                        + " and Id " + user.getId()
+                        + " created successfully");
             }
         }
 
@@ -53,7 +55,9 @@ public class UsersTest extends BaseTest {
                 for (int i = 0; i < DEFAULT_ARRAY_LENGTH; i++) {
                     User user = User.getDefaultUser();
                     users.add(user);
-                    System.out.println("Test User with username " + user.getUsername() + " and Id " + user.getId() + " added to List of Users");
+                    System.out.println("Test User with username " + user.getUsername()
+                            + " and Id " + user.getId()
+                            + " added to List of Users");
                 }
                 ApiResponse response = apiService.addListOfUsers(users);
                 assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
@@ -80,7 +84,9 @@ public class UsersTest extends BaseTest {
                 for (int i = 0; i < DEFAULT_ARRAY_LENGTH; i++) {
                     User user = User.getDefaultUser();
                     users[i] = user;
-                    System.out.println("Test User with username " + user.getUsername() + " and Id " + user.getId() + " added to Array of Users");
+                    System.out.println("Test User with username " + user.getUsername()
+                            + " and Id " + user.getId()
+                            + " added to Array of Users");
                 }
                 ApiResponse response = apiService.addArrayOfUsers(users);
                 assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
@@ -105,9 +111,10 @@ public class UsersTest extends BaseTest {
             void shouldReturnDefaultUserByUsername() throws ApiException {
                 User response = apiService.findUserByUsername(DEFAULT_USERNAME);
                 assertThat(response).matches(user -> user.getUsername().equals(DEFAULT_USERNAME));
-                System.out.println("User with username " + response.getUsername() + " has Id " + response.getId());
+                System.out.println("User with username " + response.getUsername()
+                        + " has Id " + response.getId()
+                        + "was found successfully");
             }
-
         }
 
         @Nested
@@ -130,7 +137,8 @@ public class UsersTest extends BaseTest {
                 String password = user.getPassword();
                 ApiResponse response = apiService.loginUser(username, password);
                 assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
-                System.out.println("Test User with username " + user.getUsername() + " logged in successfully: " + response.getMessage());
+                System.out.println("Test User with username " + user.getUsername()
+                        + " logged in successfully: " + response.getMessage());
             }
         }
 
@@ -153,7 +161,8 @@ public class UsersTest extends BaseTest {
                 ApiResponse response = apiService.logoutUser();
                 assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
                 assertThat(response.getMessage()).isEqualTo("ok");
-                System.out.println("Test User with username " + user.getUsername() + " logged out successfully");
+                System.out.println("Test User with username " + user.getUsername()
+                        + " logged out successfully");
             }
         }
 
@@ -179,7 +188,8 @@ public class UsersTest extends BaseTest {
                 assertThat(response.getCode()).isEqualTo(STATUS_CODE_OK);
                 assertThat(response.getMessage()).isEqualTo(user.getId().toString());
                 System.out.println("User with username " + user.getUsername()
-                        + " changed Id to " + response.getMessage());
+                        + " changed Id to " + response.getMessage()
+                        + " successfully");
             }
         }
 
