@@ -1,43 +1,39 @@
 package tests.uitest;
 
 import config.SystemProperties;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import page.CommonAction;
+import org.openqa.selenium.chrome.ChromeDriver;
 import page.HomePage;
 import page.MainPage;
-import service.ApiService;
+
+import java.time.Duration;
 
 import static config.SystemConstants.*;
-import static config.SystemProperties.*;
 
 public abstract class BaseUiTest {
+
     protected static WebDriver driver;
-    static ApiService apiService = new ApiService(SystemProperties.APPLICATION_URL);
-//    protected MainPage mainPage = new MainPage(driver);
-//    protected HomePage homePage = new HomePage(driver);
+    protected static String baseUrl;
+    protected static MainPage mainPage;
+    protected HomePage homePage = new HomePage(driver,baseUrl);
+
+    @BeforeAll
+    public static void setup() {
+        baseUrl = SystemProperties.BASE_URL;
+    }
 
     @BeforeEach
-    void setup() {
-        driver = CommonAction.driver;
+    void init() {
+        driver = WebDriverManager.chromedriver().create();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(IMPLICIT_WAIT_DURATION_MILLIS));
     }
 
     @AfterEach
-    public void clearCookiesAndLocalStorage() {
-        if (CLEAR_COOKIES_AND_STORAGE) {
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-            driver.manage().deleteAllCookies();
-            javascriptExecutor.executeScript("windows.sessionStorage.clear()");
-        }
+    public void tearDown() {
+        driver.quit();
     }
-
-    @AfterAll()
-    public static void done() {
-        if (HOLD_BROWSER_OPEN) {
-            driver.quit();
-        }
-    }
-
-
 }

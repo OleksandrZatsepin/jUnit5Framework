@@ -1,0 +1,22 @@
+package page;
+
+import org.openqa.selenium.By;
+
+public enum MainMenuItem {
+
+    HOME_MENU_ITEM(By.xpath("//*[@id='menu']/table/tbody/tr/td[1]/a")),
+    BUGS_MENU_ITEM(By.xpath("//*[@id='menu']/table/tbody/tr/td[2]/a")),
+    DOWNLOAD_MENU_ITEM(By.xpath("//*[@id='menu']/table/tbody/tr/td[3]/a")),
+    TRAINING_MENU_ITEM(By.xpath("//*[@id='menu']/table/tbody/tr/td[4]/a")),
+    BLOG_MENU_ITEM(By.xpath("//*[@id='menu']/table/tbody/tr/td[5]/a"));
+
+    private final By mainMenuItem;
+
+    MainMenuItem(By mainMenuItem) {
+        this.mainMenuItem = mainMenuItem;
+    }
+
+    public By getMainMenuItem() {
+        return mainMenuItem;
+    }
+}

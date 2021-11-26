@@ -1,25 +1,18 @@
 package page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MainPage extends BasePage {
 
-//    private static final By DISCLAIMER = By.xpath("");
+//    private final MainMenu mainMenu = new MainMenu(driver, baseUrl);
 
-//    public final MenuPage menuPage;
-//    public final SponsorPage sponsorPage;
-//    public final SidePage sidePage;
-
-    public MainPage(WebDriver driver) {
-        super(driver);
-//        this.menuPage = new MenuPage(driver);
-//        this.sponsorPage = new SponsorPage(driver);
-//        this.sidePage = new SidePage(driver);
+    public MainPage(WebDriver driver, String baseUrl) {
+        super(driver, baseUrl);
     }
 
-//    static void menu(String location) {
-//        MenuPage.menu(location);
+
+//    void navigate(String location) {
+//        mainMenu.navigate(location);
 //    }
 
 //    static void sponsor(String locator) {

@@ -13,33 +13,30 @@ public class SystemConstants {
      * Timeout constants in seconds.
      * Implicit and Explicit wait.
      */
-    public static final Long IMPLICIT_WAIT_DURATION_SEC = 0L;
-    public static final Long MAX_WAIT_DURATION_SEC = 5L;
+    public static final Long IMPLICIT_WAIT_DURATION_MILLIS = 500L;
+    public static final Long MAX_WAIT_DURATION_MILLIS = 5000L;
 
     /**
-     * Platform and browser constant.
-     * Uncomment only one of them.
-     * public static final String PLATFORM_AND_BROWSER = "win_chrome";
-     * public static final String PLATFORM_AND_BROWSER = "linux_chrome";
-     * public static final String PLATFORM_AND_BROWSER = "win_edge";
-     * public static final String PLATFORM_AND_BROWSER = "linux_edge";
-     * public static final String PLATFORM_AND_BROWSER = "win_firefox";
-     * public static final String PLATFORM_AND_BROWSER = "linux_firefox";
-     * TODO - add other platforms and drivers
+     * Browser constant.
+     * Uncomment only one string.
+     * It works with BROWSER = "Chrome" now.
+     *
+     * public static final String BROWSER = "Chrome";
+     * public static final String BROWSER = "Firefox";
+     * public static final String BROWSER = "Edge";
+     * public static final String BROWSER = "Opera";
+     * public static final String BROWSER = "Safari";
+     * public static final String BROWSER = "Internet Explorer";
+     *
+     * TODO Create a Browser Factory with WebDriverManager
+     * ( www.eliasnogueira.com/create-a-browser-factory-with-webdrivermanager/ )
      */
-    public static final String PLATFORM_AND_BROWSER = "linux_chrome";
 
     /**
      * Clear browser cookies after each iteration
      * if true - clear cookies
      */
     public static final Boolean CLEAR_COOKIES_AND_STORAGE = true;
-
-    /**
-     * To close the browser after test suite
-     * if true - browser close
-     */
-    public static final Boolean HOLD_BROWSER_OPEN = true;
 
     /**
      * URL for testing

@@ -2,13 +2,14 @@ package tests.uitest;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import page.CommonAction;
 
-public class SampleUiTest {
+import static org.assertj.core.api.Assertions.*;
+
+public class SampleUiTest extends BaseUiTest{
 
     @Test
     public void checkIfOpenedHomePage() {
-       WebDriver driver = new CommonAction().createDriver();
-       driver.get("http://www.itsecgames.com/index.htm");
+        driver.get(baseUrl);
+        assertThat(driver.getTitle()).contains("bWAPP, a buggy web application!");
     }
 }
