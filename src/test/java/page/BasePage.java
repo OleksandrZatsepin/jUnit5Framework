@@ -3,7 +3,6 @@ package page;
 import static config.SystemConstants.*;
 import static config.SystemProperties.*;
 
-import config.SystemProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,52 +13,52 @@ import java.time.Duration;
 import java.util.List;
 
 abstract class BasePage {
-    protected final WebDriver driver;
-    protected static String baseUrl;
 
-    public BasePage(WebDriver driver, String baseUrl) {
+    protected WebDriver driver;
+    protected static String baseUrl = BASE_URL;
+
+
+    protected BasePage(WebDriver driver, String baseUrl) {
         this.driver = driver;
-        this.baseUrl = SystemProperties.BASE_URL;
+        this.baseUrl = baseUrl;
     }
 
-    protected void open(String path) {
-        path += baseUrl;
-        driver.get(path);
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    protected void click(By locator) {
-        click(findElement(locator));
+    public void open(String path) {
+        driver.get(baseUrl + path);
     }
 
-    protected void click(WebElement element) {
-        new WebDriverWait(driver, Duration.ofMillis(MAX_WAIT_DURATION_MILLIS))
+//    protected void click(MainMenuItem mainMenuItem) {
+//        click(mainMenuItem);
+//    }
+
+    public void click(WebElement element) {
+        new WebDriverWait(driver, Duration.ofSeconds(MAX_WAIT_DURATION_MILLIS))
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
-    protected WebElement findElement(By locator) {
-        return new WebDriverWait(driver, Duration.ofMillis(MAX_WAIT_DURATION_MILLIS))
+    public WebElement findElement(By locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(MAX_WAIT_DURATION_MILLIS))
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    protected List<WebElement> findElements(By locator) {
+    public List<WebElement> findElements(By locator) {
         return driver.findElements(locator);
     }
 
-    protected void typeText(String text, By locator) {
+    public void typeText(String text, By locator) {
         WebElement element = findElement(locator);
         element.sendKeys(text);
     }
 
-    protected void refresh() {
+    public void refresh() {
         driver.navigate().refresh();
     }
 
-    protected String getText(By locator) {
+    public String getText(By locator) {
         return findElement(locator).getText();
-    }
-
-    protected WebElement waitElementIsVisible(WebElement element) {
-        return new WebDriverWait(driver, Duration.ofMillis(MAX_WAIT_DURATION_MILLIS))
-                .until(ExpectedConditions.visibilityOf(element));
     }
 }

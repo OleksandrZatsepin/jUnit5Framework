@@ -13,8 +13,8 @@ public class SystemConstants {
      * Timeout constants in seconds.
      * Implicit and Explicit wait.
      */
-    public static final Long IMPLICIT_WAIT_DURATION_MILLIS = 500L;
-    public static final Long MAX_WAIT_DURATION_MILLIS = 5000L;
+    public static final Long IMPLICIT_WAIT_DURATION_MILLIS = 1L;
+    public static final Long MAX_WAIT_DURATION_MILLIS = 10L;
 
     /**
      * Browser constant.
@@ -37,13 +37,6 @@ public class SystemConstants {
      * if true - clear cookies
      */
     public static final Boolean CLEAR_COOKIES_AND_STORAGE = true;
-
-    /**
-     * URL for testing
-     */
-    public static class Urls {
-        public static final String SITE_HOME_PAGE = "http://www.itsecgames.com/index.htm";
-    }
 
     private SystemConstants() {
     }

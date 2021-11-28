@@ -1,6 +1,7 @@
-package page;
+package page.bwapp.menu;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public enum MainMenuItem {
 
@@ -13,10 +14,10 @@ public enum MainMenuItem {
     private final By mainMenuItem;
 
     MainMenuItem(By mainMenuItem) {
-        this.mainMenuItem = mainMenuItem;
+        this.mainMenuItem = (By) mainMenuItem;
     }
 
     public By getMainMenuItem() {
-        return mainMenuItem;
+        return (By) mainMenuItem;
     }
 }
