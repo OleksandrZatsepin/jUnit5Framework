@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class OrdersTest extends BaseTest {
 
     @Nested
-    @DisplayName("Endpoint: " + ORDER_ENDPOINT +", method: POST")
+    @DisplayName("Endpoint: " + ORDER_ENDPOINT + ", method: POST")
     class OrderTestsForPostMethod {
         @Nested
         @DisplayName("Positive tests")
@@ -57,7 +57,7 @@ public class OrdersTest extends BaseTest {
     }
 
     @Nested
-    @DisplayName("Endpoint: "+ ORDER_BY_ID_ENDPOINT + ", method: GET")
+    @DisplayName("Endpoint: " + ORDER_BY_ID_ENDPOINT + ", method: GET")
 
     class OrderTestsForGetMethod {
         @Nested

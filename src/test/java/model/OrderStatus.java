@@ -3,7 +3,9 @@ package model;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum OrderStatus {
-    PLACED("placed"), APPROVED("approved"), DELIVERED("delivered");
+    PLACED("placed"),
+    APPROVED("approved"),
+    DELIVERED("delivered");
 
     private final String orderStatus;
     OrderStatus(String orderStatus) {

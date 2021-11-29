@@ -31,10 +31,6 @@ abstract class BasePage {
         driver.get(baseUrl + path);
     }
 
-//    protected void click(MainMenuItem mainMenuItem) {
-//        click(mainMenuItem);
-//    }
-
     public void click(WebElement element) {
         new WebDriverWait(driver, Duration.ofSeconds(MAX_WAIT_DURATION_MILLIS))
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
